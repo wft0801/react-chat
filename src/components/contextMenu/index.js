@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import assign from 'object-assign'
-
 import './index.css'
-import _ from 'lodash'
 
 class RightClickContextMenu extends Component {
+  constructor(props) {
+    super(props)
+  }
 
   static defaultProps = {
     style: {},
@@ -36,7 +36,7 @@ class RightClickContextMenu extends Component {
 
   // 右键菜单事件
   handleContextMenu = (event) => {
-    console.log(this.state.curIndex)
+    console.log(event)
     event.preventDefault()
     event.stopPropagation();
     
@@ -78,6 +78,7 @@ class RightClickContextMenu extends Component {
 
   // 鼠标单击事件，当鼠标在任何地方单击时，设置菜单不显示
   handleClick = () => {
+    this.props.changeListMode();
     const { visible } = this.state
     if (visible) {
       this.setState({ visible: false })
@@ -89,12 +90,10 @@ class RightClickContextMenu extends Component {
   }
 
   render() {
-    const wrapStyles = assign({}, this.props.style)
     const { visible } = this.state
-
     return (
       visible && (
-        <div ref={(ref) => { this.root = ref }} className="contextMenu-wrap" style={wrapStyles}>
+        <div ref={(ref) => { this.root = ref }} className="contextMenu-wrap" >
           <div className="contextMenu-option" onClick={() => this.changeItemMode()}>撤回</div>
         </div>
       )

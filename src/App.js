@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ListItem from './components/ListItem/index';
 import { listData } from './static/listData';
-
+import ContextMenu from './components/ContextMenu';
 import './App.css';
 
 const App = () => {
@@ -26,6 +26,17 @@ const App = () => {
   const inputChange = (e) => {
     setValue(e.target.value)
   }
+  const changeListMode = () => {
+    console.log('========'+list)
+    list.map((item, index) => {
+      if(index === 0) {
+        item.mode = 'withdraw';
+        item.content = '您撤回了一条消息'
+      }
+    })
+    console.log(list)
+    setList(list);
+  }
   return (
     <div className="chat-container">
       <header className="chat-header">
@@ -40,6 +51,7 @@ const App = () => {
         <input type="text" value={value} onChange={inputChange} />
         <button onClick={onPostMessage}>发送</button>
       </div>
+      <ContextMenu changeListMode={changeListMode}/>
     </div>
   );
 }

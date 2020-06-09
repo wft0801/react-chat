@@ -1,13 +1,10 @@
 import React from 'react'; 
-import Word from '../word';
-import Image from '../image';
-import ContextMenu from '../contextMenu';
-
+import Word from '../Word';
+import Image from '../Image';
 import './index.css';
 
 const ListItem = (props) => {
   const { avatar, content, mode, type } = props;
-
   const showTypeContent = (type) => {
     return (
       <>
@@ -42,7 +39,7 @@ const ListItem = (props) => {
           <div className="withdraw">{content}</div>
         )
       }
-      <ContextMenu />
+
     </>
   )
 }
