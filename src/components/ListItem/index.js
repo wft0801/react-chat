@@ -1,6 +1,8 @@
 import React from 'react'; 
 import Word from '../word';
 import Image from '../image';
+import ContextMenu from '../contextMenu';
+
 import './index.css';
 
 const ListItem = (props) => {
@@ -14,6 +16,7 @@ const ListItem = (props) => {
       </>
     )
   }
+
   return (
     <>
       { mode === 'left' && 
@@ -39,6 +42,7 @@ const ListItem = (props) => {
           <div className="withdraw">{content}</div>
         )
       }
+      <ContextMenu />
     </>
   )
 }
