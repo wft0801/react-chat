@@ -1,24 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import ListItem from './components/ListItem/index';
+import { listData } from './static/listData';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [list, setList] = useState(listData);
+  const [value, setValue] = useState('');
+
+  const onPostMessage = () => {
+    const newInfo = {
+      type: 'word',
+      avatar: '乙',
+      mode: 'right',
+      content: value
+    }
+    const newListData = [].concat(list, newInfo);
+    setList(newListData);
+  }
+  const inputChange = (e) => {
+    setValue(e.target.value)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="chat-container">
+      <header className="chat-header">
+        聊天记录
       </header>
+      <div className="chat-content">
+        {
+          list.map((item, index) => <ListItem {...item} key={index}/>)
+        }
+      </div>
+      <div className="input-base">
+        <input type="text" value={value} onChange={inputChange} />
+        <button onClick={onPostMessage}>发送</button>
+      </div>
     </div>
   );
 }
